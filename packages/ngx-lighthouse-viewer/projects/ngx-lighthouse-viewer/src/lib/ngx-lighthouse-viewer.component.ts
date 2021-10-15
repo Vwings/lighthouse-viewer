@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DOM, Logger, ReportRenderer, ReportUIFeatures, template } from 'lighthouse-viewer';
 
 @Component({
@@ -20,7 +19,7 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
 
   private _viewInit: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor() {
     this.template = template;
   }
 
@@ -35,8 +34,8 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
   }
 
   lhLogEventListener = () => {
-    this.document.addEventListener('lh-log', (e: CustomEventInit) => {
-      const logger = new Logger(this.document.querySelector('#lh-log'));
+    document.addEventListener('lh-log', (e: CustomEventInit) => {
+      const logger = new Logger(document.querySelector('#lh-log'));
       switch (e.detail.cmd) {
         case 'log':
           logger.log(e.detail.msg);
@@ -60,10 +59,10 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
       return;
     }
 
-    const dom = new DOM(this.document);
+    const dom = new DOM(document);
     const renderer = new ReportRenderer(dom);
 
-    const container = this.document.querySelector('main.ngx-lighthouse-viewer');
+    const container = document.querySelector('main.ngx-lighthouse-viewer');
 
     renderer.renderReport(this.json, container);
 

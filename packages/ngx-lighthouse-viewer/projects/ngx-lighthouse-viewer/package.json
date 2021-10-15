@@ -1,6 +1,6 @@
 {
   "name": "ngx-lighthouse-viewer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "lighthouse",
     "devtools",
@@ -14,11 +14,11 @@
     "url": "https://github.com/dvelasquez/lighthouse-viewer/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^12.2.0",
-    "@angular/core": "^12.2.0"
+    "@angular/common": "^10.2.5",
+    "@angular/core": "^10.2.5"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
+    "tslib": "^2.0.0",
     "lighthouse-viewer": "^0.1.19"
   }
 }
