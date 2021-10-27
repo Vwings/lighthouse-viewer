@@ -21,11 +21,13 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
 
   template;
   
-  _darkStatus!: boolean;
+  private _darkStatus!: boolean;
 
   private _viewInit: boolean = false;
 
   private _feature: any;
+
+  private _pendingDarkStatus!: any;
 
 
   constructor() {
@@ -89,6 +91,11 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
     const features = new ReportUIFeatures(dom);
     features.initFeatures(this.json);
     this._feature = features;
+
+    if (this._pendingDarkStatus != null) {
+      this._feature.changeTheme(this._pendingDarkStatus);
+      this._pendingDarkStatus = null;
+    } 
   }
 
   _onThemeChange(darkTheme: boolean) {
@@ -101,6 +108,7 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
   _changeTheme() {
     this._darkStatus = this.dark;
     if (!this._feature) {
+      this._pendingDarkStatus = this._darkStatus;
       return;
     }
 
