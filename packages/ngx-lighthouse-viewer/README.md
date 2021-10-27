@@ -27,6 +27,12 @@ export class AppModule { }
 3. Use component
 
 ```html
-<ngx-lighthouse-viewer [json]="data"></ngx-lighthouse-viewer>
+<ngx-lighthouse-viewer 
+  [json]="data"
+  [dark]="dark"
+  (darkChange)="onDarkChange($event)">
+</ngx-lighthouse-viewer>
 ```
-
+- `json`: report json.
+- `dark`: `boolean`. Control component themes from outside.
+- `darkChange`: `EventEmitter`.Listen to the theme switching event inside the component.

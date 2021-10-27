@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
   
   data: any;
 
+  dark: any;
+
   private _reports: any[] = [];
 
   ngOnInit() {
@@ -22,5 +24,17 @@ export class AppComponent implements OnInit {
   renderReport(index: number) {
     this.data = this._reports[index];
   }
+
+  changeTheme(dark?: any) {
+    this.dark = !!dark
+  }
+
+
+  onDarkChange(value: any) {
+    this.dark = value;
+    console.log('dark change', value)
+  }
+
+  
   
 }

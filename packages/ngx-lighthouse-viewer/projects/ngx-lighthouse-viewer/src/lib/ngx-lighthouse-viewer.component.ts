@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { DOM, Logger, ReportRenderer, ReportUIFeatures, template } from 'lighthouse-viewer';
 
 @Component({
@@ -15,16 +15,32 @@ import { DOM, Logger, ReportRenderer, ReportUIFeatures, template } from 'lightho
 export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
   @Input() json: any;
 
+
+  @Input()  dark!: boolean;
+  @Output() darkChange = new EventEmitter<boolean>();
+
   template;
+  
+  _darkStatus!: boolean;
 
   private _viewInit: boolean = false;
+
+  private _feature: any;
+
 
   constructor() {
     this.template = template;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.generateReport();
+    const {json, dark} = changes;
+    if (json) {
+      this.generateReport();
+    }
+
+    if (dark && dark.currentValue != null && dark.currentValue !== this._darkStatus) {
+      this._changeTheme();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -35,21 +51,25 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
 
   lhLogEventListener = () => {
     document.addEventListener('lh-log', (e: CustomEventInit) => {
-      const logger = new Logger(document.querySelector('#lh-log'));
-      switch (e.detail.cmd) {
-        case 'log':
-          logger.log(e.detail.msg);
-          break;
-        case 'warn':
-          logger.warn(e.detail.msg);
-          break;
-        case 'error':
-          logger.error(e.detail.msg);
-          break;
-        case 'hide':
-          logger.hide();
-          break;
-        default:
+      if (e.detail.cmd === 'data' && e.detail.msg === 'toggle_theme') {
+        this._onThemeChange(e.detail.data);
+      }else {
+        const logger = new Logger(document.querySelector('#lh-log'));
+        switch (e.detail.cmd) {
+          case 'log':
+            logger.log(e.detail.msg);
+            break;
+          case 'warn':
+            logger.warn(e.detail.msg);
+            break;
+          case 'error':
+            logger.error(e.detail.msg);
+            break;
+          case 'hide':
+            logger.hide();
+            break;
+          default:
+        }
       }
     });
   };
@@ -68,5 +88,22 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
 
     const features = new ReportUIFeatures(dom);
     features.initFeatures(this.json);
+    this._feature = features;
+  }
+
+  _onThemeChange(darkTheme: boolean) {
+    if (this._darkStatus !== darkTheme) {
+      this._darkStatus = darkTheme;
+      this.darkChange.emit(this._darkStatus);
+    }
+  }
+
+  _changeTheme() {
+    this._darkStatus = this.dark;
+    if (!this._feature) {
+      return;
+    }
+
+    this._feature.changeTheme(this._darkStatus);
   }
 }

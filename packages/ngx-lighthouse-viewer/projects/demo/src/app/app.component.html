@@ -1,4 +1,8 @@
-<div>
+<div [style.background-color]="dark ? 'black': 'white'">
   <h1>ANGULAR APP</h1>
-  <ngx-lighthouse-viewer [json]="data"></ngx-lighthouse-viewer>
+  <div>
+    <button (click)="changeTheme(true)">change theme(black)</button>
+    <button (click)="changeTheme()">change theme(white)</button>
+  </div>
+  <ngx-lighthouse-viewer [json]="data" [dark]="dark" (darkChange)="onDarkChange($event);"></ngx-lighthouse-viewer>
 </div>
