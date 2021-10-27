@@ -72,3 +72,32 @@ mountViewer();
 ## All the credits to the Lightouse Authors
 If there is any issue with the license or the copyrights, please let me know. There is no other intentions behind this 
 besides making it easy to find.
+
+
+4. change theme
+
+- manully change theme
+
+```js
+const features = new ReportUIFeatures(dom);
+// ...
+// dark theme
+features.changeTheme(true);
+// default theme
+features.changeTheme(false);
+
+```
+
+- get theme changing event
+
+
+```js
+document.addEventListener('lh-log', (e) => {
+  const {cmd, msg, data} = e.detail;
+  if (cmd === 'data' && msg === 'toggle_theme') {
+    // true: dark theme false: default theme
+    console.log(data);
+  }
+});
+
+```

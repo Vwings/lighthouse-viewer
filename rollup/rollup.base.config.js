@@ -1,12 +1,13 @@
-import replace from '@rollup/plugin-replace';
-import resolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-import analyzer from 'rollup-plugin-analyzer';
 import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
-import postcss from 'rollup-plugin-postcss';
+import analyzer from 'rollup-plugin-analyzer';
 import htmlString from 'rollup-plugin-html';
+import postcss from 'rollup-plugin-postcss';
+import { string } from "rollup-plugin-string";
 import svelte from 'rollup-plugin-svelte';
+import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess';
 
 export default (
@@ -22,6 +23,13 @@ export default (
   },
   sourcemap = true,
 ) => {
+  const commonPlugins = [
+    string({
+      include: ['**/report/standalone.js']
+      // include: ['**/*.html', '**/report/standalone.js']
+    }),
+  ];
+  
   const rollupESMConfig = {
     input: `${cwd}/${entry}`,
     output: [
@@ -49,7 +57,7 @@ export default (
           collapseWhitespace: true,
           collapseBooleanAttributes: true,
           conservativeCollapse: true,
-          minifyCSS: true,
+          // minifyCSS: true,
           minifyJS: true,
         },
       }),
@@ -65,6 +73,7 @@ export default (
       }),
       minify && terser({ module: true, output: { comments: false } }), // If minify is true, the code will be minified
       analyzer({ summaryOnly: true }), // Useful plugin to check what is using most of the space in the bundle
+      ...commonPlugins
     ],
   };
 
@@ -97,7 +106,7 @@ export default (
           collapseWhitespace: true,
           collapseBooleanAttributes: true,
           conservativeCollapse: true,
-          minifyCSS: true,
+          // minifyCSS: true,
           minifyJS: true,
         },
       }),
@@ -113,7 +122,8 @@ export default (
       }),
       commonjs(),
       minify && terser({ output: { comments: false } }),
-      analyzer({ summaryOnly: true }),
+      analyzer({ summaryOnly: true }),   
+      ...commonPlugins
     ],
   };
 

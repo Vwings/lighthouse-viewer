@@ -17,18 +17,16 @@
 'use strict';
 
 /* eslint-env browser */
-
 /**
  * @fileoverview Adds tools button, print, and other dynamic functionality to
  * the report.
  */
-
 /** @typedef {import('./dom').DOM} DOM */
-
-import {getFilenamePrefix} from './file-namer.js';
-import {ElementScreenshotRenderer} from './element-screenshot-renderer.js';
-import {TextEncoding} from './text-encoding.js';
-import {Util} from './util.js';
+import { ReportGenerator } from '../report-generator.js';
+import { ElementScreenshotRenderer } from './element-screenshot-renderer.js';
+import { getFilenamePrefix } from './file-namer.js';
+import { TextEncoding } from './text-encoding.js';
+import { Util } from './util.js';
 
 /**
  * @param {HTMLTableElement} tableEl
@@ -680,8 +678,7 @@ export class ReportUIFeatures {
    * @protected
    */
   getReportHtml() {
-    this._resetUIState();
-    return this._document.documentElement.outerHTML;
+    return ReportGenerator.generateReportHtml(this.json);
   }
 
   /**
@@ -729,6 +726,19 @@ export class ReportUIFeatures {
       el.classList.toggle('dark');
     } else {
       el.classList.toggle('dark', force);
+    }
+
+    this._fireEventOn('lh-log', this._document, {
+      cmd: 'data', msg: 'toggle_theme', data: el.classList.contains('dark')
+    });
+  }
+
+  changeTheme(dark) {
+    const el = this._dom.find('.lh-vars', this._document);
+    if (dark) {
+      el.classList.toggle('dark');
+    }else {
+      el.classList.remove('dark');
     }
   }
 

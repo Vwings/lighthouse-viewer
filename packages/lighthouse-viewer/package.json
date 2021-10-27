@@ -1,7 +1,7 @@
 {
   "name": "lighthouse-viewer",
   "description": "Package with the lighthouse-viewer files from the official repositories of Lighthouse",
-  "version": "0.1.19",
+  "version": "1.0.0",
   "private": false,
   "main": "./dist/lighthouse-viewer.umd.js",
   "module": "./dist/lighthouse-viewer.esm.js",
@@ -30,6 +30,8 @@
   "scripts": {
     "prebuild": "rimraf src/imported/* && node utils/copy-deps.js",
     "build": "rollup -c && npm run copy:types",
+    "build:local": "rollup -c && npm run copy:types",
+    "build:standalone": "rollup -c rollup.config.standalone.js",
     "copy:types": "cpx \"src/types/**/*\" dist/types"
   },
   "devDependencies": {
