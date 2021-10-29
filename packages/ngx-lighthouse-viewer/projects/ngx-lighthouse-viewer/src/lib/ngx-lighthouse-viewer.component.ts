@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { DOM, Logger, ReportRenderer, ReportUIFeatures, template } from 'lighthouse-viewer';
+import { DOM, ReportRenderer, ReportUIFeatures, template } from 'lighthouse-viewer';
 
 @Component({
   selector: 'ngx-lighthouse-viewer',
@@ -56,22 +56,22 @@ export class NgxLighthouseViewerComponent implements AfterViewInit, OnChanges {
       if (e.detail.cmd === 'data' && e.detail.msg === 'toggle_theme') {
         this._onThemeChange(e.detail.data);
       }else {
-        const logger = new Logger(document.querySelector('#lh-log'));
-        switch (e.detail.cmd) {
-          case 'log':
-            logger.log(e.detail.msg);
-            break;
-          case 'warn':
-            logger.warn(e.detail.msg);
-            break;
-          case 'error':
-            logger.error(e.detail.msg);
-            break;
-          case 'hide':
-            logger.hide();
-            break;
-          default:
-        }
+        // const logger = new Logger(document.querySelector('#lh-log'));
+        // switch (e.detail.cmd) {
+        //   case 'log':
+        //     logger.log(e.detail.msg);
+        //     break;
+        //   case 'warn':
+        //     logger.warn(e.detail.msg);
+        //     break;
+        //   case 'error':
+        //     logger.error(e.detail.msg);
+        //     break;
+        //   case 'hide':
+        //     logger.hide();
+        //     break;
+        //   default:
+        // }
       }
     });
   };
