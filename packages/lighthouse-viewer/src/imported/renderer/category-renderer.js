@@ -21,7 +21,7 @@
 /** @typedef {import('./details-renderer.js').DetailsRenderer} DetailsRenderer */
 /** @typedef {'failed'|'warning'|'manual'|'passed'|'notApplicable'} TopLevelClumpId */
 
-import {Util} from './util.js';
+import { Util } from './util.js';
 
 export class CategoryRenderer {
   /**
@@ -319,7 +319,9 @@ export class CategoryRenderer {
   renderScoreGauge(category, groupDefinitions) { // eslint-disable-line no-unused-vars
     const tmpl = this.dom.createComponent('gauge');
     const wrapper = this.dom.find('a.lh-gauge__wrapper', tmpl);
-    this.dom.safelySetHref(wrapper, `#${category.id}`);
+    // this.dom.safelySetHref(wrapper, `#${category.id}`);
+    wrapper.setAttribute('href', "javascript:void(0);");
+    wrapper.setAttribute('onclick', `window.location.hash='#${category.id}';`)
 
     if (Util.isPluginCategory(category.id)) {
       wrapper.classList.add('lh-gauge__wrapper--plugin');
