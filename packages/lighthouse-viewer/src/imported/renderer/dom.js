@@ -19,8 +19,8 @@
 /** @typedef {HTMLElementTagNameMap & {[id: string]: HTMLElement}} HTMLElementByTagName */
 /** @template {string} T @typedef {import('typed-query-selector/parser').ParseSelector<T, Element>} ParseSelector */
 
-import {Util} from './util.js';
-import {createComponent} from './components.js';
+import { createComponent } from './components.js';
+import { Util } from './util.js';
 
 export class DOM {
   /**
@@ -134,6 +134,7 @@ export class DOM {
       a.rel = 'noopener';
       a.target = '_blank';
       a.textContent = segment.text;
+      a.title = '外部链接';
       this.safelySetHref(a, url.href);
       element.appendChild(a);
     }

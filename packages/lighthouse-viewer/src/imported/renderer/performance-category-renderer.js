@@ -18,8 +18,8 @@
 
 /** @typedef {import('./dom.js').DOM} DOM */
 
-import {Util} from './util.js';
-import {CategoryRenderer} from './category-renderer.js';
+import { CategoryRenderer } from './category-renderer.js';
+import { Util } from './util.js';
 
 export class PerformanceCategoryRenderer extends CategoryRenderer {
   /**
@@ -194,6 +194,7 @@ export class PerformanceCategoryRenderer extends CategoryRenderer {
     const calculatorLink = this.dom.createChildOf(estValuesEl, 'a', 'lh-calclink');
     calculatorLink.target = '_blank';
     calculatorLink.textContent = strings.calculatorLink;
+    calculatorLink.title = '外部链接';
     this.dom.safelySetHref(calculatorLink, this._getScoringCalculatorHref(category.auditRefs));
 
 

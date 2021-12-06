@@ -199,6 +199,7 @@ export class ReportUIFeatures {
     }
     const buttonEl = this._dom.createChildOf(buttonsEl, 'button', classes.join(' '));
     buttonEl.textContent = opts.text;
+    buttonEl.title = '外部链接';
     buttonEl.addEventListener('click', opts.onClick);
     return buttonEl;
   }

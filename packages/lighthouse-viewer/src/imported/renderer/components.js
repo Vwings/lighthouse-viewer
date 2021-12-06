@@ -715,12 +715,12 @@ function createTopbarComponent(dom) {
   el36.setAttribute('href', '#');
   el36.setAttribute('data-i18n', 'dropdownSaveJSON');
   el36.setAttribute('data-action', 'save-json');
-  const el37 = dom.createElement('a', 'report-icon report-icon--open');
-  el37.setAttribute('role', 'menuitem');
-  el37.setAttribute('tabindex', '-1');
-  el37.setAttribute('href', '#');
-  el37.setAttribute('data-i18n', 'dropdownViewer');
-  el37.setAttribute('data-action', 'open-viewer');
+  // const el37 = dom.createElement('a', 'report-icon report-icon--open');
+  // el37.setAttribute('role', 'menuitem');
+  // el37.setAttribute('tabindex', '-1');
+  // el37.setAttribute('href', '#');
+  // el37.setAttribute('data-i18n', 'dropdownViewer');
+  // el37.setAttribute('data-action', 'open-viewer');
   const el38 = dom.createElement('a', 'report-icon report-icon--open');
   el38.setAttribute('role', 'menuitem');
   el38.setAttribute('tabindex', '-1');
@@ -734,7 +734,7 @@ function createTopbarComponent(dom) {
   el39.setAttribute('data-i18n', 'dropdownDarkTheme');
   el39.setAttribute('data-action', 'toggle-dark');
   // el31.append(' ', el32, ' ', el33, ' ', el34, ' ', el35, ' ', el36, ' ', el37, ' ', el38, ' ', el39, ' ');
-  el31.append(' ', el34, ' ', el35, ' ', el36, ' ', el37, ' ', el38, ' ', el39, ' ');
+  el31.append(' ', el34, ' ', el35, ' ', el36, ' ', el38, ' ', el39, ' ');
   el26.append(' ', el27, ' ', el31, ' ');
   el2.append(' ', ' ', el3, ' ', el25, ' ', el26, ' ');
   el0.append(el2);

@@ -9,3 +9,10 @@ This is a monorepo-multipackage managed with Lerna to publish to NPM the followi
 - [svelte-lighthouse-viewer](./packages/svelte-lighthouse-viewer): A wrapper of the lighthouse-viewer for Svelte 3.
 
 If you want a wrapper in for another library/framework, just open an issue ;)
+
+
+# Custom build
+
+```
+npx lerna run build:local --scope lighthouse-viewer
+```
