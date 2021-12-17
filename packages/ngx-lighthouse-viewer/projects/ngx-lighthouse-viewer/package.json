@@ -1,6 +1,6 @@
 {
   "name": "ngx-lighthouse-viewer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "keywords": [
     "lighthouse",
     "devtools",
@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "tslib": "^2.0.0",
-    "lighthouse-viewer": "^1.0.0"
+    "lighthouse-viewer": "^1.0.2"
   }
 }
